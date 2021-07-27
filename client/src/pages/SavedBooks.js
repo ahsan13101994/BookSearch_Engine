@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-import { getMe, deleteBook } from '../utils/API';
+//import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
@@ -12,12 +12,13 @@ import { REMOVE_BOOK } from '../utils/mutations';
 const SavedBooks = () => {
   const { loading, data} = useQuery(GET_ME);
   const [removeBook, {error}] = useMutation(REMOVE_BOOK);
+  
   const userData = data?.me || [];
 
-  const [userData, setUserData] = useState({});
+  //const [userData, setUserData] = useState({});
 
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+  //const userDataLength = Object.keys(userData).length;
 
   // useEffect(() => {
   //   const getUserData = async () => {
@@ -53,10 +54,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const {data} = await removeBook({
-        variables: { bookId }
-      });
-      //const response = await deleteBook(bookId, token);
+       //const response = await deleteBook(bookId, token);
 
       // if (!response.ok) {
       //   throw new Error('something went wrong!');
@@ -65,6 +63,11 @@ const SavedBooks = () => {
       // const updatedUser = await response.json();
       // setUserData(updatedUser);
       // // upon success, remove book's id from localStorage
+
+      const {data} = await removeBook({
+        variables: { bookId }
+      });
+     
       removeBookId(bookId);
     } catch (err) {
       console.error(err);
